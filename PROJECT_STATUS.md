@@ -18,6 +18,7 @@
 | **Step 5: Layouts & CSS** | โมดูล `layouts.py` และ `assets/style.css` (Header, Global Filters, 3 Tabs, Footer) | ✅ เสร็จสิ้น | 2026-10-21 16:36 | ออกแบบธีม Modern Academic, รองรับ Responsive ทุกหน้าจอ |
 | **Step 6: Interactive Callbacks** | โมดูล `callbacks.py` (Reactive state, dynamic dropdown, linked filters, reset) | ✅ เสร็จสิ้น | 2026-10-21 16:37 | Single canonical filter state, อัปเดตทุกกราฟและ KPI พร้อมกัน |
 | **Step 7: App Integration & QA** | รวม Layout ใน `app.py`, ทดสอบ Acceptance Criteria A01–A12 ครบถ้วน | ✅ เสร็จสิ้น | 2026-10-21 16:39 | Full end-to-end integration & audit test ผ่าน 100% |
+| **Step 8: Streamlit Mockup Match** | พัฒนา `streamlit_app.py` ถอดแบบ UI 4 มุมมองตามภาพต้นแบบ mockup | ✅ เสร็จสิ้น | 2026-10-21 16:53 | รองรับ 4 หน้าจอหลัก + แถบกรอง 5 มิติ + แผนที่ประเทศไทย + กราฟ 2 แกน |
 
 ---
 
@@ -90,6 +91,18 @@
 ### [2026-10-21 16:39] - Step 7: Application Integration & Acceptance Audit
 - พัฒนา `app.py` รวมทุกโมดูลเป็น Dash Web Application พร้อมรันที่ Port 8050
 - ดำเนินการ Acceptance Criteria Audit ครบทั้ง 12 ข้อ (A01–A12) ผ่านการตรวจสอบ 100%
+
+### [2026-10-21 16:53] - Step 8: Streamlit Dashboard Customization (Matching User Mockup)
+- พัฒนา `streamlit_app.py` ตามตัวอย่างภาพ Mockup ที่ผู้ใช้ระบุ:
+  - **Banner Header:** ธีมเขียวธรรมชาติ พร้อมสโลแกน *"ฝน...ไม่ใช่แค่ปริมาณน้ำ แต่คือจังหวะของผลผลิต 🍃"*
+  - **Sidebar Menu:** เมนูนำทาง 4 มุมมอง (1. ภาพรวม, 2. ปริมาณน้ำฝน, 3. ผลผลิตทางการเกษตร, 4. เปรียบเทียบฝนกับผลผลิต)
+  - **5-Dimension Filter Bar:** ปี, จังหวัด, ชนิดพืช, ฤดูกาล, เดือน
+  - **View 1:** 4 KPI Cards, Combo Chart 2 แกน (Bar ฝน + Line ผลผลิต), แผนที่พิกัดผลผลิตรายจังหวัด (Scatter Geo)
+  - **View 2:** Line เปรียบเทียบ HRDI vs HII, Horizontal Bar สะสมรายปี, Heatmap ฝนรายเดือน, Boxplot การกระจายฝน
+  - **View 3:** Grouped Bar 2024 vs 2025 รายจังหวัด, Line ผลผลิตรายเดือน, Treemap สัดส่วน %, Data Table รายเดือน
+  - **View 4:** Scatter Rain vs Rubber พร้อม Trendline, Correlation Matrix/Heatmap รายจังหวัด, Time-Lag Combo Chart (0, 1, 2, 3 เดือน)
+- ผ่านการทดสอบรันด้วย Streamlit Server (HTTP Status 200)
+
 
 
 

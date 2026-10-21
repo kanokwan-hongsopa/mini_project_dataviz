@@ -146,14 +146,17 @@ mini_project_dataviz/
    - `data/oae_clean.csv` (216 แถว)
 
 5. รัน Web Application:
-   ```bash
-   python app.py
-   ```
+   - **เวอร์ชัน Streamlit (ตามตัวอย่าง Mockup):**
+     ```bash
+     streamlit run streamlit_app.py
+     ```
+     เปิดเว็บเบราว์เซอร์ที่: `http://localhost:8501`
 
-6. เปิดเว็บเบราว์เซอร์ไปที่:
-   ```text
-   http://127.0.0.1:8050
-   ```
+   - **เวอร์ชัน Plotly Dash (ตามข้อกำหนด BRD):**
+     ```bash
+     python app.py
+     ```
+     เปิดเว็บเบราว์เซอร์ที่: `http://127.0.0.1:8050`
 
 ---
 
