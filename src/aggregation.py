@@ -130,23 +130,23 @@ def merge_monthly_datasets(
     """
     # 1. Merge HII and OAE
     hii_cols = ["PROVINCE", "YEAR", "MONTH_NUM", "DATE_MONTH", "RAIN_MIN_MM", "RAIN_MAX_MM", "RAIN_AVG_MM", "RAIN_VALUES_VALID"]
-    oae_cols = ["PROVINCE", "YEAR", "MONTH_NUM", "RUBBER_TONS", "RUBBER_MONTH_SHARE_PERCENT", "PERCENT_IMPUTED_FROM_ZERO_TONS"]
+    oae_cols = ["PROVINCE", "YEAR", "MONTH_NUM", "DATE_MONTH", "RUBBER_TONS", "RUBBER_MONTH_SHARE_PERCENT", "PERCENT_IMPUTED_FROM_ZERO_TONS"]
 
     base = pd.merge(
         df_hii[hii_cols],
         df_oae[oae_cols],
-        on=["PROVINCE", "YEAR", "MONTH_NUM"],
+        on=["PROVINCE", "YEAR", "MONTH_NUM", "DATE_MONTH"],
         how="inner",
     )
 
     # 2. Left join HRDI Province-Month
     if not df_pm_hrdi.empty:
         hrdi_cols = [
-            "PROVINCE", "YEAR", "MONTH_NUM",
+            "PROVINCE", "YEAR", "MONTH_NUM", "DATE_MONTH",
             "highland_temp_mean", "highland_humidity_mean", "highland_wind_mean",
             "highland_rain_mean", "eligible_stations", "total_stations", "mean_coverage_pct"
         ]
-        merged = pd.merge(base, df_pm_hrdi[hrdi_cols], on=["PROVINCE", "YEAR", "MONTH_NUM"], how="left")
+        merged = pd.merge(base, df_pm_hrdi[hrdi_cols], on=["PROVINCE", "YEAR", "MONTH_NUM", "DATE_MONTH"], how="left")
     else:
         merged = base.copy()
         for c in ["highland_temp_mean", "highland_humidity_mean", "highland_wind_mean", "highland_rain_mean", "eligible_stations", "total_stations", "mean_coverage_pct"]:

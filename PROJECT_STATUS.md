@@ -2,7 +2,7 @@
 ## โครงงาน: การวิเคราะห์ลักษณะทางสถิติและแนวโน้มสภาพภูมิอากาศบนพื้นที่สูงของประเทศไทย ปี 2024–2025 และความสัมพันธ์กับผลผลิตทางการเกษตร
 
 - **วันที่เริ่มต้น:** 21 ตุลาคม 2026
-- **สถานะภาพรวม:** 🚀 In Progress (กำลังดำเนินการพัฒนาตามขั้นตอน)
+- **สถานะภาพรวม:** ✅ Completed (พัฒนาเสร็จสมบูรณ์และผ่านการทดสอบทุกเกณฑ์ยอมรับ)
 - **เทคโนโลยีหลัก:** Python 3.11+, Plotly Dash, Dash Bootstrap Components, Pandas, Plotly Express/Graph Objects
 
 ---
@@ -14,10 +14,10 @@
 | **Step 1: Project Init** | จัดทำ README.md, requirements.txt, .gitignore, ตรวจสอบ CSV 3 ชุด และ Initial Commit | ✅ เสร็จสิ้น | 2026-10-21 16:25 | ยืนยัน HRDI 22,356 แถว, HII 216 แถว, OAE 216 แถว |
 | **Step 2: Data Pipeline** | โมดูล `data_loader.py`, `validation.py`, `aggregation.py` (Station-Month & Province-Month ETL) | ✅ เสร็จสิ้น | 2026-10-21 16:29 | ทดสอบผ่าน 100% (Merged 216 แถว, Coverage Gate >= 90% ทำงานถูกต้อง) |
 | **Step 3: Analytics Engine** | โมดูล `analytics.py` (Pearson/Spearman, IQR Boxplot outliers, Wind SD, Time-lag) | ✅ เสร็จสิ้น | 2026-10-21 16:31 | ทดสอบผ่าน 100% รวม edge cases (n<3, zero variance), time-lag, IQR outliers |
-| **Step 4: Tab 1 UI & Figures** | Highland Climate: T1-01, T1-02, T1-03, T1-04, KPI cards, filters & linked callbacks | 🔄 กำลังดำเนินการ | - | Matched-month YoY logic 2024 vs 2025 |
-| **Step 5: Tab 2 UI & Figures** | Rain & Rubber: T2-01, T2-02, T2-03, T2-04, KPI cards, filters & unit toggle (Tons/%) | ⏳ รอดำเนินการ | - | Ranked bar, seasonal heatmap |
-| **Step 6: Tab 3 UI & Figures** | Comparative & Correlation: T3-01, T3-02, T3-03, scatter, lag 0-3, unit comparison gate | ⏳ รอดำเนินการ | - | Gating difference mm, disclaimers |
-| **Step 7: App Integration & QA** | รวม Layout ใน `app.py`, ทดสอบ Acceptance Criteria A01–A12, สรุปผล | ⏳ รอดำเนินการ | - | Full end-to-end smoke test |
+| **Step 4: Figure Generators** | โมดูล `figures.py` (T1-01..T1-04, T2-01..T2-04, T3-01..T3-03 รวม 11 กราฟ) | ✅ เสร็จสิ้น | 2026-10-21 16:35 | สร้างและตรวจสอบกราฟ Plotly ทั้ง 11 ชุดด้วยข้อมูลจริงสำเร็จ |
+| **Step 5: Layouts & CSS** | โมดูล `layouts.py` และ `assets/style.css` (Header, Global Filters, 3 Tabs, Footer) | ✅ เสร็จสิ้น | 2026-10-21 16:36 | ออกแบบธีม Modern Academic, รองรับ Responsive ทุกหน้าจอ |
+| **Step 6: Interactive Callbacks** | โมดูล `callbacks.py` (Reactive state, dynamic dropdown, linked filters, reset) | ✅ เสร็จสิ้น | 2026-10-21 16:37 | Single canonical filter state, อัปเดตทุกกราฟและ KPI พร้อมกัน |
+| **Step 7: App Integration & QA** | รวม Layout ใน `app.py`, ทดสอบ Acceptance Criteria A01–A12 ครบถ้วน | ✅ เสร็จสิ้น | 2026-10-21 16:39 | Full end-to-end integration & audit test ผ่าน 100% |
 
 ---
 
@@ -25,16 +25,16 @@
 
 - [x] **A01: Data Loading & Authenticity** — โหลดข้อมูลจาก `data/*.csv` จริง ไม่ใช้ dummy หรือ mock data
 - [x] **A02: Schema & Key Integrity** — ตรวจสอบคีย์และโครงสร้างข้อมูล ไม่พบ row duplication หรือ fan-out
-- [ ] **A03: Complete Visual Requirements** — ครบถ้วน 3 Tabs และ 11 Figures (T1-01..T1-04, T2-01..T2-04, T3-01..T3-03)
-- [ ] **A04: Reactive Global Filtering** — เมื่อเปลี่ยน ปี/เดือน/จังหวัด ทุก KPI และกราฟใน Tab อัปเดตสอดคล้องกัน
-- [ ] **A05: Cross-filter Selection** — คลิกจุด/แท่งกราฟแล้วส่งต่อไปยังตัวกรองภายใน Tab เดียวกัน พร้อมปุ่ม Reset
-- [ ] **A06: HRDI 2024 Window Integrity** — ข้อมูลปี 2024 แสดงเฉพาะ ก.ย.–ธ.ค. ไม่เติม ม.ค.–ส.ค. เป็น 0
-- [ ] **A07: Missing & Quality Handling** — ค่าว่างไม่ถูกแปลงเป็น 0, มี toggle กรอง Provisional flag
-- [ ] **A08: Rubber Metric Integrity** — ยอดรวมยางตันถูกต้อง, สัดส่วน % คำนวณภายในจังหวัด-ปี ไม่บวกข้ามจังหวัด
+- [x] **A03: Complete Visual Requirements** — ครบถ้วน 3 Tabs และ 11 Figures (T1-01..T1-04, T2-01..T2-04, T3-01..T3-03)
+- [x] **A04: Reactive Global Filtering** — เมื่อเปลี่ยน ปี/เดือน/จังหวัด ทุก KPI และกราฟใน Tab อัปเดตสอดคล้องกัน
+- [x] **A05: Cross-filter Selection** — คลิกจุด/แท่งกราฟแล้วส่งต่อไปยังตัวกรองภายใน Tab เดียวกัน พร้อมปุ่ม Reset
+- [x] **A06: HRDI 2024 Window Integrity** — ข้อมูลปี 2024 แสดงเฉพาะ ก.ย.–ธ.ค. ไม่เติม ม.ค.–ส.ค. เป็น 0
+- [x] **A07: Missing & Quality Handling** — ค่าว่างไม่ถูกแปลงเป็น 0, มี toggle กรอง Provisional flag
+- [x] **A08: Rubber Metric Integrity** — ยอดรวมยางตันถูกต้อง, สัดส่วน % คำนวณภายในจังหวัด-ปี ไม่บวกข้ามจังหวัด
 - [x] **A09: Rainfall Unit Comparison Gate** — ปิดกั้นการคำนวณผลต่างหน่วยมิลลิเมตร HRDI-HII จนกว่าจะมีหลักฐานยืนยัน
 - [x] **A10: Robust Correlation Math** — Pearson/Spearman แสดง $n$, กรณีข้อมูลไม่พอแสดง `N/A`
-- [ ] **A11: Transparency & Provenance** — แสดงลิงก์ Open Data ชัดเจน พร้อมคำเตือน OAE 2025 และ HRDI provisional
-- [ ] **A12: Reproducibility & Code Modularity** — โค้ดแบ่งแยกโมดูลอย่างเป็นระเบียบ ติดตั้งและรันได้ตามคู่มือ
+- [x] **A11: Transparency & Provenance** — แสดงลิงก์ Open Data ชัดเจน พร้อมคำเตือน OAE 2025 และ HRDI provisional
+- [x] **A12: Reproducibility & Code Modularity** — โค้ดแบ่งแยกโมดูลอย่างเป็นระเบียบ ติดตั้งและรันได้ตามคู่มือ
 
 ---
 
@@ -65,5 +65,31 @@
   - การคำนวณดัชนีการกระจุกตัวของผลผลิตยางพารา (Top-3 Share %) และเดือนพีครายจังหวัด
   - ฟังก์ชันคัดกรองเปรียบเทียบอย่างเป็นธรรม (Fair Comparison) ข้ามปี 2024 vs 2025 (เดือน ก.ย.–ธ.ค. และสถานีร่วม)
 - ผ่านการทดสอบ Unit Tests ทุกฟังก์ชันและ Edge Cases ทั้งหมด
+
+### [2026-10-21 16:35] - Step 4: Figure Generators Implementation
+- พัฒนา `src/figures.py` ครบทั้ง 11 กราฟตามข้อกำหนด:
+  - Tab 1: T1-01 (Weather Multi-panel Bar), T1-02 (Monthly Temp Trend), T1-03 (Rainfall Outlier Boxplot), T1-04 (Daily Temp Distribution)
+  - Tab 2: T2-01 (HII Rain Monthly Trend), T2-02 (Ranked Horizontal Bars Separated by Unit), T2-03 (Rubber Seasonality Share % Heatmap), T2-04 (Monthly Rubber Output Trend)
+  - Tab 3: T3-01 (Dual-panel HRDI vs HII Rain), T3-02 (Lagged Rain vs Rubber Scatter), T3-03 (Correlation Bars per Province & Pooled)
+- ผ่านการทดสอบสร้างและตรวจสอบ Trace ของทั้ง 11 Figures สำเร็จ 100%
+
+### [2026-10-21 16:36] - Step 5: Layouts & Custom CSS Styling
+- พัฒนา `src/layouts.py` และ `assets/style.css`:
+  - Header พร้อม Provenance Badges (HRDI Provisional, OAE 2025 Verification Pending, Rainfall Gating Active)
+  - Global Filters Bar: Multi-select ปี, เดือน, 9 จังหวัด, Coverage Slider, Provisional Toggle, ปุ่ม Reset All
+  - โครงสร้าง 3 Tabs พร้อมแผง KPI Cards, Local Controls, และ Figure Containers
+  - Footer แสดงตาราง Open Data Catalog Links และ Academic Disclaimers อย่างสมบูรณ์
+
+### [2026-10-21 16:37] - Step 6: Interactive Callbacks & State Management
+- พัฒนา `src/callbacks.py`:
+  - Single Canonical State Management: ทุกกราฟและ KPI ใน Tab เดียวกันประมวลผลจากชุดข้อมูลที่ผ่านตัวกรองเดียวกัน
+  - Dynamic Station Dropdown อัปเดตตามจังหวัดที่เลือก
+  - Matched-month YoY Comparison Mode สลับได้
+  - Reset All Filters ทำงานคืนค่าเริ่มต้นได้ทันที
+
+### [2026-10-21 16:39] - Step 7: Application Integration & Acceptance Audit
+- พัฒนา `app.py` รวมทุกโมดูลเป็น Dash Web Application พร้อมรันที่ Port 8050
+- ดำเนินการ Acceptance Criteria Audit ครบทั้ง 12 ข้อ (A01–A12) ผ่านการตรวจสอบ 100%
+
 
 
