@@ -3,6 +3,13 @@ Main Entry Point: Thailand Highland Climate × Provincial Rainfall × Rubber Yie
 Plotly Dash Web Application with Python Backend
 """
 import sys
+
+# Ensure UTF-8 output encoding on Windows consoles
+if sys.stdout:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if sys.stderr:
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 from pathlib import Path
 import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
@@ -33,15 +40,15 @@ app = Dash(
 server = app.server
 
 # 2. Load and validate baseline datasets
-print("🚀 Loading clean datasets...")
+print("[INFO] Loading clean datasets...")
 df_hrdi, df_hii, df_oae = load_all_datasets()
 qa_results = run_full_validation(df_hrdi, df_hii, df_oae)
 
 if not qa_results["all_valid"]:
-    print("⚠️ WARNING: Data validation reported potential issues:")
+    print("[WARNING] Data validation reported potential issues:")
     print(qa_results)
 else:
-    print("✅ All datasets validated successfully against baseline specifications!")
+    print("[SUCCESS] All datasets validated successfully against baseline specifications!")
 
 # 3. Build application layout
 app.layout = html.Div(
@@ -88,5 +95,5 @@ register_callbacks(app, df_hrdi, df_hii, df_oae)
 
 if __name__ == "__main__":
     port = 8050
-    print(f"🌟 Starting Highland Climate Dashboard on http://127.0.0.1:{port}")
+    print(f"[INFO] Starting Highland Climate Dashboard on http://127.0.0.1:{port}")
     app.run(debug=False, host="127.0.0.1", port=port)
