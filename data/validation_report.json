@@ -1,0 +1,50 @@
+{
+  "validation": [
+    {
+      "DATASET": "HRDI",
+      "CHECK": "Source rows retained",
+      "VALUE": 7462,
+      "PASSED": true
+    },
+    {
+      "DATASET": "HRDI",
+      "CHECK": "Duplicate source-province-month keys",
+      "VALUE": 0,
+      "PASSED": true
+    },
+    {
+      "DATASET": "HII",
+      "CHECK": "Expected province-month rows",
+      "VALUE": 945,
+      "PASSED": true
+    },
+    {
+      "DATASET": "Hotspot",
+      "CHECK": "Monthly records match source",
+      "VALUE": 106042,
+      "PASSED": true
+    },
+    {
+      "DATASET": "Combined",
+      "CHECK": "Row count after merge",
+      "VALUE": 1415,
+      "PASSED": true
+    },
+    {
+      "DATASET": "Combined",
+      "CHECK": "Duplicate keys",
+      "VALUE": 0,
+      "PASSED": true
+    }
+  ],
+  "data_quality_notes": [
+    "ใช้ข้อมูลต้นฉบับจริงจาก HRDI, HII และ Hotspot",
+    "แยก HRDI Weather Station และ OpenWeatherMap",
+    "ไม่เติม Missing Values โดยไม่มีหลักฐาน",
+    "ไม่ลบ Outlier อัตโนมัติ",
+    "Hotspot Groups ไม่ใช่จำนวนเหตุการณ์ไฟป่าที่ไม่ซ้ำกันจริง",
+    "HRDI มีข้อมูลถึงปี 2023",
+    "Hotspot ครอบคลุมปี 2022-2023",
+    "ต้องยืนยันหน่วยวัด HRDI ก่อนเปรียบเทียบฝนกับ HII"
+  ]
+}
